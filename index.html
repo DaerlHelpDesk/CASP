@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CASP Farmer Portal</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+  :root {
+    --primary: #2b5b84;
+    --primary-dark: #1e4464;
+    --primary-light: #3a6fa5;
+    --secondary: #4caf50;
+    --light: #f5f8fb;
+    --white: #ffffff;
+    --gray: #6c757d;
+    --border-radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background-color: var(--light);
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* Header Styles */
+  header {
+    background-color: var(--primary);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .logo {
+    height: 60px;
+  }
+
+  .header-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .nav-buttons {
+    display: flex;
+    gap: 15px;
+  }
+
+  .nav-btn {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+  }
+
+  .nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Main Content */
+  .container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+  }
+
+  .welcome-section {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  h1 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
+    color: var(--gray);
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 30px;
+    transition: var(--transition);
+    text-align: center;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .card-icon {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+  }
+
+  .card h3 {
+    color: var(--primary);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+  }
+
+  .card p {
+    color: var(--gray);
+    margin-bottom: 20px;
+  }
+
+  .btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-weight: 500;
+    width: 100%;
+  }
+
+  .btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background-color: var(--secondary);
+  }
+
+  .btn-secondary:hover {
+    background-color: #3d8b40;
+  }
+
+  /* Steps Section */
+  .steps {
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    background: var(--white);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+  }
+
+  .steps h2 {
+    color: var(--primary);
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 1.8rem;
+  }
+
+  .steps-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .step {
+    text-align: center;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    background-color: rgba(43, 91, 132, 0.05);
+  }
+
+  .step-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary);
+    color: white;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  .step h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .step p {
+    color: var(--gray);
+    font-size: 14px;
+  }
+
+  /* Features Section */
+  .features {
+    margin-bottom: 50px;
+  }
+
+  .section-title {
+    text-align: center;
+    color: var(--primary);
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+  }
+
+  .feature {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: 25px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+  }
+
+  .feature:hover {
+    transform: translateY(-5px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 15px;
+  }
+
+  .feature h3 {
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+
+  .feature p {
+    color: var(--gray);
+    font-size: 14px;
+  }
+
+  /* Footer */
+  footer {
+    background-color: var(--primary);
+    color: white;
+    text-align: center;
+    padding: 30px 20px;
+    margin-top: 60px;
+  }
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: left;
+  }
+
+  .footer-section h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+  }
+
+  .footer-section p, .footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+    transition: var(--transition);
+  }
+
+  .footer-section a:hover {
+    color: white;
+    text-decoration: underline;
+  }
+
+  .copyright {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    header {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+    
+    .nav-buttons {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    h1 {
+      font-size: 2rem;
+    }
+    
+    .dashboard {
+      grid-template-columns: 1fr;
+    }
+    
+    .steps-list {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 15px;
+    }
+    
+    .card, .steps, .feature {
+      padding: 20px;
+    }
+    
+    .nav-btn, .btn {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+
+  /* Animation for step numbers */
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .step-number {
+    animation: pulse 2s infinite;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-container">
+    <img class="logo" src="https://provincialgovernment.co.za/img/logos/thumb_7_agriculture%2C_environmental_affairs%2C_rural_development_and_land_reform.png" alt="CASP Logo">
+    <div class="header-title">CASP Farmer Portal</div>
+  </div>
+  
+  <div class="nav-buttons">
+    <button class="nav-btn" id="homeBtn">
+      <i class="fas fa-home"></i> Home
+    </button>
+    <button class="nav-btn" id="loginBtn">
+      <i class="fas fa-user"></i> Login
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <div class="welcome-section">
+    <h1>Welcome to the CASP Farmer Portal</h1>
+    <p class="subtitle">Empowering farmers with resources, funding opportunities, and support for sustainable agricultural development.</p>
+  </div>
+
+  <div class="dashboard">
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h3>Create Profile</h3>
+      <p>Register your household and farm details to access CASP services and funding opportunities.</p>
+      <button class="btn" onclick="goTo('Famersprofile.html')">
+        <i class="fas fa-user-edit"></i> Create Profile
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-hand-holding-usd"></i>
+      </div>
+      <h3>Apply for Funding</h3>
+      <p>Submit your application for agricultural funding and support programs.</p>
+      <button class="btn btn-secondary" onclick="goTo('funding.html')">
+        <i class="fas fa-file-alt"></i> Apply Now
+      </button>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <h3>Track Application</h3>
+      <p>Check the status of your submitted applications and view previous submissions.</p>
+      <button class="btn" onclick="goTo('tracking.html')">
+        <i class="fas fa-search"></i> Track Status
+      </button>
+    </div>
+  </div>
+
+  <div class="steps">
+    <h2>How to Apply for CASP Support</h2>
+    <div class="steps-list">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Create Profile</h3>
+        <p>Register your household and farm details in the system.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Apply for Funding</h3>
+        <p>Complete the application form with your project details.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Submit Documents</h3>
+        <p>Upload required supporting documents for verification.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h3>Review Process</h3>
+        <p>Your application will be reviewed by agricultural officers.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">5</div>
+        <h3>Receive Notification</h3>
+        <p>Get notified of the application outcome via SMS or email.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="features">
+    <h2 class="section-title">Our Services</h2>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3>Input Support</h3>
+        <p>Access to quality seeds, fertilizers, and farming equipment.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-tractor"></i>
+        </div>
+        <h3>Mechanization</h3>
+        <p>Support with farm machinery and equipment for efficient farming.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-graduation-cap"></i>
+        </div>
+        <h3>Training</h3>
+        <p>Agricultural training programs and workshops for skill development.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">
+          <i class="fas fa-handshake"></i>
+        </div>
+        <h3>Market Access</h3>
+        <p>Connect with markets and buyers for your agricultural products.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>Contact Us</h3>
+      <p><i class="fas fa-phone"></i> +27 783138897</p>
+      <p><i class="fas fa-envelope"></i> lmoichwanetsi@daerl.co.za</p>
+      <p><i class="fas fa-map-marker-alt"></i> 90 George Streete Street, Kimberley</p>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Quick Links</h3>
+      <a href="Famersprofile.html">Create Profile</a>
+      <a href="funding.html">Apply for Funding</a>
+      <a href="tracking.html">Track Application</a>
+      <a href="resources.html">Resources</a>
+    </div>
+    
+    <div class="footer-section">
+      <h3>Resources</h3>
+     <a href="guidelines.html">Application Guidelines</a>
+      <a href="faq.html">FAQ</a>
+      <a href="training.html">Training Materials</a>
+      <a href="contact.html">Support Center</a>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    © 2025 Department of Agriculture, Environmental Affairs, Rural Development and Land Reform (NC)
+  </div>
+</footer>
+
+<script>
+function goTo(page) {
+  window.location.href = page;
+}
+
+// Navigation button functionality
+document.getElementById('homeBtn').addEventListener('click', function() {
+  // Already on home page, could refresh or scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+document.getElementById('loginBtn').addEventListener('click', function() {
+  alert('Login functionality would be implemented here');
+  // In a real application, this would redirect to login page
+  // window.location.href = '/login.html';
+});
+
+// Add some interactive elements
+document.addEventListener('DOMContentLoaded', function() {
+  // Add animation to cards on scroll
+  const cards = document.querySelectorAll('.card, .feature');
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  cards.forEach(card => {
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+});
+</script>
+
+</body>
+</html>

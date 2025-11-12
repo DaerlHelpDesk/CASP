@@ -202,7 +202,8 @@ document.getElementById('profileForm').addEventListener('submit', async function
     // add other fields here
   };
   try{
-    const response = await fetch("YOUR_POWER_AUTOMATE_URL",{
+      const response = await fetch("https://default49706821a64a483e9fb07941d4c4e4.f6.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/cd63032e4246414eb2b8a3d6a7a3676d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Whjqzm0zwpYBmELIf-qO-qa8CbhDOcg66OP5so_3FrU", 
+                                   {
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify(formData)
@@ -218,3 +219,4 @@ document.getElementById('profileForm').addEventListener('submit', async function
 </script>
 </body>
 </html>
+
